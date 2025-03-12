@@ -1,7 +1,30 @@
-# Ignore Visual Studio temporary files
+# .NET Core
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+*.cache
+*.log
+
+# IDEs
 .vs/
-*.vsidx
+.vscode/
 *.suo
 *.user
-*.cache
-*.pdb
+*.vcxproj.user
+
+# ASP.NET Core
+secrets.json
+appsettings.Development.json
+Migrations/
+
+# Dependencies
+*.nupkg
+packages/
+project.lock.json
+
+# Publish output
+wwwroot/
+obj/**/*.cshtml.g.cs
+Project_DotNet.sln
