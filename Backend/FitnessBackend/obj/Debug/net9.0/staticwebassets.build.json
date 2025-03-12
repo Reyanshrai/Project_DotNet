@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "8kZz53asMdeUj9txotoVo3+wcgfazmhA1Gb7xh0V7m4=",
+  "Source": "FitnessBackend",
+  "BasePath": "_content/FitnessBackend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
