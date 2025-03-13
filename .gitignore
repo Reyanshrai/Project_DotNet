@@ -28,3 +28,4 @@ project.lock.json
 wwwroot/
 obj/**/*.cshtml.g.cs
 Project_DotNet.sln
+recent_commits.txt
