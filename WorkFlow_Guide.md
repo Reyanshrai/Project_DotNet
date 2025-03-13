@@ -71,3 +71,5 @@ This will launch the project in **VS Code**.
 6️⃣ **Open in VS Code** → `code .`  
 
 🔥 Now you're ready to code! 🚀
+
+git log -n 2 --pretty=format:"%h - %s (%an, %ar)" > recent_commits.txt
