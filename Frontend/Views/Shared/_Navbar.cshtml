@@ -1,0 +1,65 @@
+@{
+    var currentPage = Context.Request.Path;
+}
+
+<nav class="navbar navbar-expand-lg bg-dark text-light fixed-top border-bottom">
+    <div class="container d-flex align-items-center justify-content-between">
+        <!-- Logo (Left Side) -->
+        <a class="navbar-brand d-flex align-items-center text-light" asp-controller="Home" asp-action="Index">
+            <img src="~/images/logo.png" alt="Logo" width="50" height="50" class="me-2">
+            <div>
+                <span class="fw-bold text-danger">GYM..</span>
+                <small class="d-block text-light">FITNESS FOR ALL</small>
+            </div>
+        </a>
+
+        <!-- Center Aligned Navbar Links -->
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav">
+                @foreach (var item in new[] {
+                    new { Name = "HOME", Path = "/" },
+                    new { Name = "ABOUT", Path = "/About" },
+                    new { Name = "SERVICES", Path = "/Services" },
+                    new { Name = "TIMETABLE", Path = "/Timetable" },
+                    new { Name = "TRAINER", Path = "/Trainer" },
+                    new { Name = "PRICING", Path = "/Pricing" },
+                    new { Name = "CONTACT", Path = "/Contact" }
+                })
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-light @(currentPage == item.Path ? "active fw-bold text-primary" : "")"
+                            asp-controller="@item.Path.Substring(1)" asp-action="Index">
+                            @item.Name
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <!-- Get Started Button (Right Side) -->
+        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#loginModal">Get Started</button>
+
+        <!-- Mobile Menu Button -->
+        <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+
+<!-- Modal for Login Options -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark text-light">
+            <div class="modal-header">
+                <h5 class="modal-title text-light" id="loginModalLabel">Choose Login</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <button onclick="window.location.href='/Admin/Login'" class="btn btn-primary w-100 mb-2">Admin Login</button>
+                <button onclick="window.location.href='/Login'" class="btn btn-success w-100 mb-2">User Login</button>
+                <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,43 +9,96 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Frontend.styles.css" asp-append-version="true" />
+    <!-- Bootstrap Icons CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
 </head>
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Frontend</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+
+    <partial name="_Navbar" />
+
+    <div class="container mt-5 pt-5">
+        @RenderBody()
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false)
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - Frontend - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+ 
+
+    <footer class="bg-dark text-light py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Logo and About Section -->
+            <div class="col-md-3">
+                <h2 class="fw-bold">GYM™</h2>
+                <p class="text-secondary">
+                    Your fitness journey starts here. At GYM™, we provide world-class trainers, 
+                    state-of-the-art facilities, and the motivation you need to reach your goals.
+                </p>
+            </div>
+
+            <!-- Quick Links Section -->
+            <div class="col-md-3">
+                <h5 class="fw-bold">Quick Links</h5>
+                <ul class="list-unstyled">
+                    @foreach (var link in new[] { "About Us", "Our Services", "Meet Our Trainers", "Membership Plans", "FAQs" })
+                    {
+                        <li>
+                            <a href="#" class="text-secondary text-decoration-none d-block py-1">
+                                @link
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="col-md-3">
+                <h5 class="fw-bold">Contact Us</h5>
+                <p class="text-secondary mb-1"><strong>Email:</strong> info@gym.com</p>
+                <p class="text-secondary mb-1"><strong>Phone:</strong> +1 (123) 456-7890</p>
+                <p class="text-secondary"><strong>Address:</strong> 123 Fitness Street, Wellness City, USA</p>
+            </div>
+
+            <!-- Social Media Section -->
+            <div class="col-md-3">
+                <h5 class="fw-bold">Follow Us</h5>
+                <div class="d-flex gap-2">
+                    <a href="https://linkedin.com" class="btn btn-outline-light rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                        <i class="bi bi-linkedin"></i>
+                    </a>
+                    <a href="https://instagram.com" class="btn btn-outline-light rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                    <a href="https://facebook.com" class="btn btn-outline-light rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+                    <a href="https://twitter.com" class="btn btn-outline-light rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                        <i class="bi bi-twitter"></i>
+                    </a>
+                    <a href="https://youtube.com" class="btn btn-outline-light rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                        <i class="bi bi-youtube"></i>
+                    </a>
+                </div>
+            </div>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+        
+        <!-- Footer Bottom -->
+        <div class="text-center text-secondary mt-4 border-top pt-3">
+            © @DateTime.Now.Year GYM™. All rights reserved. Designed with ❤️ by GYM Team.
+        </div>
+    </div>
+</footer>
+
+
+
 </body>
+
 </html>
