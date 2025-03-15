@@ -1,0 +1,33 @@
+@model List<Frontend.Models.PricingViewModel>
+
+@{
+    ViewData["Title"] = "Pricing";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center text-danger fw-bold display-4">#06 Pricing</h1>
+    <h2 class="text-center fw-semibold fs-3">
+        The foremost source and cheap <span class="text-danger">#Pricing</span>
+    </h2>
+
+    <div class="row mt-4">
+        @foreach (var plan in Model)
+        {
+            <div class="col-md-4 d-flex justify-content-center">
+                <div class="card shadow-lg border-0" style="width: 22rem; background-image: url('/images/plan.png'); background-size: cover; background-position: center;">
+                    <div class="card-body text-center text-white" style="padding: 2rem;">
+                        <h5 class="card-title text-uppercase fw-bold display-6">@plan.PlanName</h5>
+                        <h3 class="fw-bold display-5">$@plan.Price<span class="fs-4">/month</span></h3>
+                        <ul class="list-unstyled my-4">
+                            @foreach (var feature in plan.Features)
+                            {
+                                <li class="fs-5">• @feature</li>
+                            }
+                        </ul>
+                        <a href="@Url.Action("Login", "Account")" class="btn btn-danger btn-lg w-100">Choose Plan</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
