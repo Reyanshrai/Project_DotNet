@@ -1,9 +1,15 @@
 .carousel-item img {
-  height: 70vh; /* Full height */
+  width:100vw; /* Full width */
+  height: 75vh; /* Full height */
   object-fit: cover; /* Maintain aspect ratio and cover the area */
 }
 
 .carousel-caption {
   left: 5%; /* Move text to left */
-  bottom: 30%; /* Adjust vertical position */
+  bottom: 0%; /* Adjust vertical position */
+}
+
+.btn-danger:hover {
+  transform: scale(1.1);
+  transition: all 0.3s ease-in-out;
 }

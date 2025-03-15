@@ -1,0 +1,66 @@
+@model List<Frontend.Models.TimetableViewModel>
+
+@{
+    ViewData["Title"] = "Fitness Class Schedule";
+}
+
+<div class="container my-5">
+    <div class="text-center mb-4">
+        <h1 class="display-4 text-danger fw-bold">Fitness Class Schedule</h1>
+        <p class="text-secondary">Transform your life with our expert-led fitness classes</p>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead class="bg-danger text-white">
+                <tr>
+                    <th class="p-3">
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-calendar me-2"></i>
+                            Day
+                        </div>
+                    </th>
+                    @foreach (var time in new[] { "10 AM", "11 AM", "3 PM", "5 PM", "7 PM" })
+                    {
+                        <th class="p-3 text-center">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <i class="bi bi-clock me-2"></i>
+                                @time
+                            </div>
+                        </th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var row in Model)
+                {
+                    <tr class="@(Model.IndexOf(row) % 2 == 0 ? "bg-light" : "")">
+                        <td class="p-3 fw-bold text-secondary">@row.Day</td>
+                        @foreach (var session in row.Sessions)
+                        {
+                            var details = session.Split('\n');
+                            <td class="p-3 text-center">
+                                @if (!string.IsNullOrEmpty(session))
+                                {
+                                    <div class="border rounded-3 p-2 shadow-sm bg-white">
+                                        <div class="fw-bold text-danger">@details[0]</div>
+                                        <div class="text-muted small d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-clock me-1"></i> @details[1]
+                                        </div>
+                                        <div class="text-muted small d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-person me-1"></i> @details[2]
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">—</span>
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

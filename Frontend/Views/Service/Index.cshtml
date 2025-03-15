@@ -1,0 +1,26 @@
+@model List<Frontend.Models.ServiceViewModel>
+
+@{
+    ViewData["Title"] = "Our Services";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center text-danger">Our Premium Services</h1>
+    <div class="row">
+        @foreach (var service in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-lg">
+                    <img src="@service.ImageUrl" class="card-img-top" alt="@service.Heading">
+                    <div class="card-body">
+                        <h5 class="card-title text-danger">@service.Heading</h5>
+                        <p class="card-text">@service.Subheading</p>
+                        <p class="text-muted">Duration: @service.Duration</p>
+                        <p class="text-muted">Trainer: @service.Trainer</p>
+                        <p class="text-muted">Intensity: @service.Intensity</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
