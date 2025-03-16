@@ -1,0 +1,49 @@
+using System;
+using System.Web.Mvc;
+using Frontend.Models; // Adjust namespace accordingly
+
+namespace Frontend.Controllers
+{
+    public class AccountController : Controller
+    {
+        // GET: Register
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Simulate saving to database (replace this with real DB logic)
+                TempData["SuccessMessage"] = "Registration successful. Please log in.";
+                return RedirectToAction("Login");
+            }
+            return View(model);
+        }
+
+        // GET: Login
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Dummy authentication (replace with real authentication logic)
+                if (model.Email == "test@example.com" && model.Password == "password")
+                {
+                    Session["User"] = model.Email;
+                    return RedirectToAction("Dashboard", "Home"); // Redirect to Dashboard
+                }
+                ModelState.AddModelError("", "Invalid email or password");
+            }
+            return View(model);
+        }
+    }
+}
