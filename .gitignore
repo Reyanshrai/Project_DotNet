@@ -1,31 +1,27 @@
-# .NET Core
+# Build output directories
 bin/
 obj/
-*.exe
-*.dll
-*.pdb
-*.cache
-*.log
 
-# IDEs
-.vs/
-.vscode/
-*.suo
+# User-specific files
 *.user
-*.vcxproj.user
+*.vs
+.vscode/
 
-# ASP.NET Core
-secrets.json
+# Logs and temp files
+*.log
+*.tmp
+*.cache
+
+# Environment settings
+.env
 appsettings.Development.json
-Migrations/
 
-# Dependencies
-*.nupkg
-packages/
+# Dependency lock files (if necessary)
 project.lock.json
 
-# Publish output
-wwwroot/
-obj/**/*.cshtml.g.cs
-Project_DotNet.sln
+# Visual Studio files (if applicable)
+*.suo
+*.user
+*.psess
+*.vsp
 recent_commits.txt
