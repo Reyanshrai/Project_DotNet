@@ -16,7 +16,7 @@ namespace Frontend.Models
 
         [Required(ErrorMessage = "Date of Birth is required")]
         [DataType(DataType.Date)]
-        public string Dob { get; set; }
+        public required string Dob { get; set; }
 
         [Required(ErrorMessage = "Mobile number is required")]
         [StringLength(10, MinimumLength = 10, ErrorMessage = "Mobile number must be 10 digits")]
