@@ -4,7 +4,7 @@
 
 <nav class="navbar navbar-expand-lg bg-dark text-light fixed-top border-bottom">
     <div class="container d-flex align-items-center justify-content-between">
-        <!-- Logo (Left Side) -->
+        <!-- Logo -->
         <a class="navbar-brand d-flex align-items-center text-light" asp-controller="Home" asp-action="Index">
             <img src="~/images/logo.png" alt="Logo" width="50" height="50" class="me-2">
             <div>
@@ -13,22 +13,22 @@
             </div>
         </a>
 
-        <!-- Center Aligned Navbar Links -->
+        <!-- Center Navbar Links -->
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul class="navbar-nav">
                 @foreach (var item in new[] {
-                    new { Name = "HOME", Path = "/" },
-                    new { Name = "ABOUT", Path = "/About" },
-                    new { Name = "SERVICE", Path = "/Service" },
-                    new { Name = "TIMETABLE", Path = "/Timetable" },
-                    new { Name = "TRAINER", Path = "/Trainer" },
-                    new { Name = "PRICING", Path = "/Pricing" },
-                    new { Name = "CONTACT", Path = "/Contact" }
-                })
+                                new { Name = "HOME", Path = "/" },
+                                new { Name = "ABOUT", Path = "/About" },
+                                new { Name = "SERVICE", Path = "/Service" },
+                                new { Name = "TIMETABLE", Path = "/Timetable" },
+                                new { Name = "TRAINER", Path = "/Trainer" },
+                                new { Name = "PRICING", Path = "/Pricing" },
+                                new { Name = "CONTACT", Path = "/Contact" }
+                                })
                 {
                     <li class="nav-item">
                         <a class="nav-link text-light @(currentPage == item.Path ? "active fw-bold text-primary" : "")"
-                            asp-controller="@item.Path.Substring(1)" asp-action="Index">
+                            asp-controller="@item.Path.TrimStart('/')" asp-action="Index">
                             @item.Name
                         </a>
                     </li>
@@ -57,7 +57,9 @@
             </div>
             <div class="modal-body text-center">
                 <button onclick="window.location.href='/Admin/Login'" class="btn btn-primary w-100 mb-2">Admin Login</button>
-                <button onclick="window.location.href='/Login'" class="btn btn-success w-100 mb-2">User Login</button>
+                <button onclick="window.location.href='@Url.Action("Login", "Auth")'" class="btn btn-success w-100 mb-2">
+                    User Login
+                </button>
                 <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Cancel</button>
             </div>
         </div>
