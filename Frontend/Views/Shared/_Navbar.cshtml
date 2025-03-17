@@ -2,8 +2,8 @@
     var currentPage = Context.Request.Path;
 }
 
-<nav class="navbar navbar-expand-lg bg-dark text-light fixed-top border-bottom">
-    <div class="container d-flex align-items-center justify-content-between">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top border-bottom">
+    <div class="container">
         <!-- Logo -->
         <a class="navbar-brand d-flex align-items-center text-light" asp-controller="Home" asp-action="Index">
             <img src="~/images/logo.png" alt="Logo" width="50" height="50" class="me-2">
@@ -13,22 +13,33 @@
             </div>
         </a>
 
-        <!-- Center Navbar Links -->
-        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-            <ul class="navbar-nav">
+        <!-- Mobile Menu Button -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <!-- Mobile Close Button -->
+            <div class="d-flex d-lg-none justify-content-end p-2">
+                <button class="btn btn-close btn-close-white" id="closeNav"></button>
+            </div>
+
+            <ul class="navbar-nav mx-auto">
                 @foreach (var item in new[] {
-                                new { Name = "HOME", Path = "/" },
-                                new { Name = "ABOUT", Path = "/About" },
-                                new { Name = "SERVICE", Path = "/Service" },
-                                new { Name = "TIMETABLE", Path = "/Timetable" },
-                                new { Name = "TRAINER", Path = "/Trainer" },
-                                new { Name = "PRICING", Path = "/Pricing" },
-                                new { Name = "CONTACT", Path = "/Contact" }
-                                })
+                    new { Name = "HOME", Path = "/" },
+                    new { Name = "ABOUT", Path = "/about" },
+                    new { Name = "SERVICE", Path = "/service" },
+                    new { Name = "TIMETABLE", Path = "/timetable" },
+                    new { Name = "TRAINER", Path = "/trainer" },
+                    new { Name = "PRICING", Path = "/pricing" },
+                    new { Name = "CONTACT", Path = "/contact" }
+                })
                 {
                     <li class="nav-item">
-                        <a class="nav-link text-light @(currentPage == item.Path ? "active fw-bold text-primary" : "")"
-                            asp-controller="@item.Path.TrimStart('/')" asp-action="Index">
+                        <a class="nav-link @(currentPage == item.Path ? "active fw-bold text-primary" : "text-light")"
+                            asp-controller="@item.Path.TrimStart('/')" asp-action="Index" onclick="closeNavbar()">
                             @item.Name
                         </a>
                     </li>
@@ -36,14 +47,10 @@
             </ul>
         </div>
 
-        <!-- Get Started Button (Right Side) -->
-        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#loginModal">Get Started</button>
-
-        <!-- Mobile Menu Button -->
-        <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <!-- Get Started Button -->
+        <div class="d-flex">
+            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#loginModal">Get Started</button>
+        </div>
     </div>
 </nav>
 
@@ -56,12 +63,22 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
-                <button onclick="window.location.href='/Admin/Login'" class="btn btn-primary w-100 mb-2">Admin Login</button>
-                <button onclick="window.location.href='@Url.Action("Login", "Auth")'" class="btn btn-success w-100 mb-2">
-                    User Login
-                </button>
+                <a href="@Url.Action("Login", "Admin")" class="btn btn-primary w-100 mb-2">Admin Login</a>
+                <a href="@Url.Action("Login", "Auth")" class="btn btn-success w-100 mb-2">User Login</a>
                 <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>
 </div>
+
+<!-- JavaScript for Closing Navbar on Mobile -->
+<script>
+    function closeNavbar() {
+        var nav = document.getElementById("navbarNav");
+        var bsCollapse = new bootstrap.Collapse(nav, { toggle: true });
+    }
+
+    document.getElementById("closeNav").addEventListener("click", function() {
+        closeNavbar();
+    });
+</script>

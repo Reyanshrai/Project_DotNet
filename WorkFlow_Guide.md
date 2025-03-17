@@ -72,4 +72,15 @@ This will launch the project in **VS Code**.
 
 🔥 Now you're ready to code! 🚀
 
+## Dotnet frontend to connect with Node js Backend require packeage
+```
+dotnet add package Microsoft.AspNetCore.Http
+```
+```
+dotnet add package Microsoft.AspNetCore.Mvc
+```
+```
+dotnet add package Microsoft.Extensions.Http
+```
+
 git log -n 2 --pretty=format:"%h - %s (%an, %ar)" > recent_commits.txt

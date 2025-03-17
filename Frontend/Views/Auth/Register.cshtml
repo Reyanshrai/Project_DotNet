@@ -1,3 +1,4 @@
+@model Frontend.Models.RegisterViewModel
 @{
     ViewData["Title"] = "User Registration";
 }
@@ -9,59 +10,64 @@
         <div class="shadow-lg rounded p-4 bg-white" style="max-width: 500px; width: 100%;">
             <h2 class="text-center text-dark mb-3">Registration Form</h2>
 
-            @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"] as string))
-            {
-                <div class="alert alert-danger text-center">@ViewData["ErrorMessage"]</div>
-            }
+            <div asp-validation-summary="All" class="text-danger"></div>
 
             <form method="post" asp-action="Register" asp-controller="Auth">
                 <div class="mb-3">
-                    <label for="firstName" class="form-label">First Name</label>
-                    <input type="text" id="firstName" name="FirstName" class="form-control" placeholder="Enter first name" required />
+                    <label asp-for="FirstName" class="form-label">First Name</label>
+                    <input asp-for="FirstName" class="form-control" placeholder="Enter first name" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
-                    <label for="lastName" class="form-label">Last Name</label>
-                    <input type="text" id="lastName" name="LastName" class="form-control" placeholder="Enter last name" required />
+                    <label asp-for="LastName" class="form-label">Last Name</label>
+                    <input asp-for="LastName" class="form-control" placeholder="Enter last name" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" id="email" name="Email" class="form-control" placeholder="Enter email address" required />
+                    <label asp-for="Email" class="form-label">Email</label>
+                    <input asp-for="Email" class="form-control" placeholder="Enter email address" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
-                    <label for="dob" class="form-label">Date of Birth</label>
-                    <input type="date" id="dob" name="DateOfBirth" class="form-control" required />
+                    <label asp-for="Dob" class="form-label">Date of Birth</label>
+                    <input asp-for="Dob" type="date" class="form-control" />
+                    <span asp-validation-for="Dob" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
-                    <label for="mobile" class="form-label">Mobile No</label>
-                    <input type="tel" id="mobile" name="MobileNumber" class="form-control" placeholder="Enter mobile number" required />
+                    <label asp-for="Mobile" class="form-label">Mobile No</label>
+                    <input asp-for="Mobile" class="form-control" placeholder="Enter mobile number" />
+                    <span asp-validation-for="Mobile" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Gender</label>
+                    <label asp-for="Gender" class="form-label">Gender</label>
                     <div class="d-flex gap-3">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="Gender" value="Male" required>
+                            <input class="form-check-input" type="radio" asp-for="Gender" value="Male" />
                             <label class="form-check-label">Male</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="Gender" value="Female" required>
+                            <input class="form-check-input" type="radio" asp-for="Gender" value="Female" />
                             <label class="form-check-label">Female</label>
                         </div>
                     </div>
+                    <span asp-validation-for="Gender" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" id="password" name="Password" class="form-control" placeholder="Enter password" required />
+                    <label asp-for="Password" class="form-label">Password</label>
+                    <input asp-for="Password" class="form-control" placeholder="Enter password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
-                    <label for="repeatPassword" class="form-label">Repeat Password</label>
-                    <input type="password" id="repeatPassword" name="RepeatPassword" class="form-control" placeholder="Repeat password" required />
+                    <label asp-for="RepeatPassword" class="form-label">Repeat Password</label>
+                    <input asp-for="RepeatPassword" class="form-control" placeholder="Repeat password" />
+                    <span asp-validation-for="RepeatPassword" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
@@ -77,3 +83,7 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
