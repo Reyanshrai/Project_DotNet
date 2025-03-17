@@ -1,97 +1,79 @@
-@model Frontend.Models.RegisterViewModel
-
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "User Registration";
 }
 
-<div class="container d-flex justify-content-center align-items-center min-vh-100">
-    <div class="card shadow-lg p-4" style="width: 450px;">
-        <h2 class="text-center text-danger fw-bold">Registration Form</h2>
-        @if (!string.IsNullOrEmpty(ViewData["SuccessMessage"] as string))
-        {
-            <div class="alert alert-success text-center">@ViewData["SuccessMessage"]</div>
-        }
-        <form asp-action="Register" method="post">
-            <!-- First Name -->
-            <div class="mb-3">
-                <label asp-for="FirstName" class="form-label fw-bold">First Name</label>
-                <input asp-for="FirstName" class="form-control" placeholder="Enter first name" required>
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
+<div class="d-flex flex-column min-vh-100">
+    <div class="flex-grow-1 d-flex align-items-center justify-content-center bg-light pt-5" style="
+        background: url('/images/registerbg.png') center center / cover no-repeat;
+    ">
+        <div class="shadow-lg rounded p-4 bg-white" style="max-width: 500px; width: 100%;">
+            <h2 class="text-center text-dark mb-3">Registration Form</h2>
 
-            <!-- Last Name -->
-            <div class="mb-3">
-                <label asp-for="LastName" class="form-label fw-bold">Last Name</label>
-                <input asp-for="LastName" class="form-control" placeholder="Enter last name" required>
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
+            @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"] as string))
+            {
+                <div class="alert alert-danger text-center">@ViewData["ErrorMessage"]</div>
+            }
 
-            <!-- Email -->
-            <div class="mb-3">
-                <label asp-for="Email" class="form-label fw-bold">Email</label>
-                <input asp-for="Email" class="form-control" placeholder="Enter email address" required>
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
+            <form method="post" asp-action="Register" asp-controller="Auth">
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" id="firstName" name="FirstName" class="form-control" placeholder="Enter first name" required />
+                </div>
 
-            <!-- Date of Birth -->
-            <div class="mb-3">
-                <label asp-for="Dob" class="form-label fw-bold">Date of Birth</label>
-                <input asp-for="Dob" type="date" class="form-control" required>
-                <span asp-validation-for="Dob" class="text-danger"></span>
-            </div>
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" id="lastName" name="LastName" class="form-control" placeholder="Enter last name" required />
+                </div>
 
-            <!-- Mobile -->
-            <div class="mb-3">
-                <label asp-for="Mobile" class="form-label fw-bold">Mobile No</label>
-                <input asp-for="Mobile" class="form-control" placeholder="Enter mobile number" required>
-                <span asp-validation-for="Mobile" class="text-danger"></span>
-            </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" name="Email" class="form-control" placeholder="Enter email address" required />
+                </div>
 
-            <!-- Gender -->
-            <div class="mb-3">
-                <label class="form-label fw-bold">Gender</label>
-                <div class="d-flex gap-3">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" asp-for="Gender" value="Male" required>
-                        <label class="form-check-label">Male</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" asp-for="Gender" value="Female" required>
-                        <label class="form-check-label">Female</label>
+                <div class="mb-3">
+                    <label for="dob" class="form-label">Date of Birth</label>
+                    <input type="date" id="dob" name="DateOfBirth" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label for="mobile" class="form-label">Mobile No</label>
+                    <input type="tel" id="mobile" name="MobileNumber" class="form-control" placeholder="Enter mobile number" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Gender</label>
+                    <div class="d-flex gap-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="Gender" value="Male" required>
+                            <label class="form-check-label">Male</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="Gender" value="Female" required>
+                            <label class="form-check-label">Female</label>
+                        </div>
                     </div>
                 </div>
-                <span asp-validation-for="Gender" class="text-danger"></span>
-            </div>
 
-            <!-- Password -->
-            <div class="mb-3">
-                <label asp-for="Password" class="form-label fw-bold">Password</label>
-                <input asp-for="Password" type="password" class="form-control" placeholder="Enter password" required>
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" name="Password" class="form-control" placeholder="Enter password" required />
+                </div>
 
-            <!-- Repeat Password -->
-            <div class="mb-3">
-                <label asp-for="RepeatPassword" class="form-label fw-bold">Repeat Password</label>
-                <input asp-for="RepeatPassword" type="password" class="form-control" placeholder="Repeat password" required>
-                <span asp-validation-for="RepeatPassword" class="text-danger"></span>
-            </div>
+                <div class="mb-3">
+                    <label for="repeatPassword" class="form-label">Repeat Password</label>
+                    <input type="password" id="repeatPassword" name="RepeatPassword" class="form-control" placeholder="Repeat password" required />
+                </div>
 
-            <!-- Submit Button -->
-            <div class="mb-3">
-                <button type="submit" class="btn btn-danger w-100">Register</button>
-            </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary w-100">Register</button>
+                </div>
 
-            <!-- Login Link -->
-            <div class="text-center">
-                <p class="text-muted">Already have an account? 
-                    <a href="@Url.Action("Login", "Auth")" class="text-danger fw-bold">Go to Sign In</a>
-                </p>
-            </div>
-        </form>
+                <div class="text-center">
+                    <p class="text-dark">Already have an account? 
+                        <a href="@Url.Action("Login", "Auth")" class="text-primary text-decoration-none">Go To Sign In</a>
+                    </p>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-
-<!-- Bootstrap -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
