@@ -63,10 +63,8 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
-                <button onclick="window.location.href='/Admin/Login'" class="btn btn-primary w-100 mb-2">Admin Login</button>
-                <button onclick="window.location.href='@Url.Action("Login", "Auth")'" class="btn btn-success w-100 mb-2">
-                    User Login
-                </button>
+                <a href="@Url.Action("Login", "Admin")" class="btn btn-primary w-100 mb-2">Admin Login</a>
+                <a href="@Url.Action("Login", "Auth")" class="btn btn-success w-100 mb-2">User Login</a>
                 <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Cancel</button>
             </div>
         </div>

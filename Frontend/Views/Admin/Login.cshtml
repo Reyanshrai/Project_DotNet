@@ -1,6 +1,6 @@
 @model Frontend.Models.LoginViewModel
 @{
-    ViewData["Title"] = "User Login";
+    ViewData["Title"] = "Admin Login";
 }
 
 <div class="d-flex flex-column min-vh-100">
@@ -8,32 +8,31 @@
         background: url('/images/registerbg.png') center center / cover no-repeat;
     ">
         <div class="shadow-lg rounded p-4 bg-white" style="max-width: 400px; width: 100%;">
-            <h2 class="text-center text-dark mb-3">Login Form</h2>
+            <h2 class="text-center text-dark mb-3">Admin Login</h2>
 
-            @if (TempData["SuccessMessage"] != null)
+            @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"] as string))
             {
-                <div class="alert alert-success text-center">@TempData["SuccessMessage"]</div>
+                <div class="alert alert-danger text-center">@ViewData["ErrorMessage"]</div>
             }
 
             <div asp-validation-summary="All" class="text-danger"></div>
 
-            <form method="post" asp-action="Login" asp-controller="Auth">
+            <form method="post" asp-action="Login" asp-controller="Admin">
                 <div class="mb-3">
                     <label asp-for="Email" class="form-label">Email</label>
-                    <input asp-for="Email" class="form-control" placeholder="Enter email address" />
+                    <input asp-for="Email" class="form-control" placeholder="Enter admin email" />
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <label asp-for="Password" class="form-label">Password</label>
                     <input asp-for="Password" class="form-control" placeholder="Enter password" />
                     <span asp-validation-for="Password" class="text-danger"></span>
-                    <a href="@Url.Action("ForgotPassword", "Auth")" class="d-block mt-2 text-primary text-decoration-none">Forgot Password?</a>
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary w-100">Login</button>
                 </div>
                 <div class="text-center">
-                    <p class="text-dark">Don't have an account? <a href="@Url.Action("Register", "Auth")" class="text-primary text-decoration-none">Go To Sign Up</a></p>
+                    <a href="@Url.Action("Index", "Home")" class="text-primary text-decoration-none">Back to Home</a>
                 </div>
             </form>
         </div>
@@ -42,4 +41,4 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-}
+} 
