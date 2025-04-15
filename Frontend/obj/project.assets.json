@@ -7947,23 +7947,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mrrai\\.nuget\\packages\\": {},
+    "C:\\Users\\vk381\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Project_DotNet\\Frontend\\Frontend.csproj",
+      "projectUniqueName": "E:\\Project_DotNet\\Frontend\\Frontend.csproj",
       "projectName": "Frontend",
-      "projectPath": "C:\\Project_DotNet\\Frontend\\Frontend.csproj",
-      "packagesPath": "C:\\Users\\mrrai\\.nuget\\packages\\",
-      "outputPath": "C:\\Project_DotNet\\Frontend\\obj\\",
+      "projectPath": "E:\\Project_DotNet\\Frontend\\Frontend.csproj",
+      "packagesPath": "C:\\Users\\vk381\\.nuget\\packages\\",
+      "outputPath": "E:\\Project_DotNet\\Frontend\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\mrrai\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\vk381\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -7990,7 +7990,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net9.0": {
@@ -8028,7 +8028,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
