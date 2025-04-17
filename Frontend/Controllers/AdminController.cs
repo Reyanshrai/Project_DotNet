@@ -47,18 +47,23 @@ namespace Frontend.Controllers
                     {
                         HttpContext.Session.SetString("AdminName", $"{response.User.FirstName} {response.User.LastName}");
                     }
+                    else
+                    {
+                        HttpContext.Session.SetString("AdminName", "Administrator");
+                    }
                     
                     HttpContext.Session.SetString("IsAdmin", "true");
                     
                     return RedirectToAction("Dashboard");
                 }
                 
-                ModelState.AddModelError("", response?.Message ?? response?.Error ?? "Admin login failed");
+                // Add error message to the view
+                ViewData["ErrorMessage"] = response?.Error ?? "Admin login failed";
                 return View(model);
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("", $"Login failed: {ex.Message}");
+                ViewData["ErrorMessage"] = $"Login failed: {ex.Message}";
                 return View(model);
             }
         }
