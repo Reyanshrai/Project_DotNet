@@ -7947,23 +7947,39 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "C:\\Users\\vk381\\.nuget\\packages\\": {},
+=======
+    "C:\\Users\\Himanshu kumar\\.nuget\\packages\\": {},
+>>>>>>> c39c5431f3f2fe89ccd4a16ff73c5e0a64a1090f
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "E:\\Project_DotNet\\Frontend\\Frontend.csproj",
       "projectName": "Frontend",
       "projectPath": "E:\\Project_DotNet\\Frontend\\Frontend.csproj",
       "packagesPath": "C:\\Users\\vk381\\.nuget\\packages\\",
       "outputPath": "E:\\Project_DotNet\\Frontend\\obj\\",
+=======
+      "projectUniqueName": "D:\\Project_Dotnet\\Project_DotNet\\frontend\\Frontend.csproj",
+      "projectName": "Frontend",
+      "projectPath": "D:\\Project_Dotnet\\Project_DotNet\\frontend\\Frontend.csproj",
+      "packagesPath": "C:\\Users\\Himanshu kumar\\.nuget\\packages\\",
+      "outputPath": "D:\\Project_Dotnet\\Project_DotNet\\frontend\\obj\\",
+>>>>>>> c39c5431f3f2fe89ccd4a16ff73c5e0a64a1090f
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
+<<<<<<< HEAD
         "C:\\Users\\vk381\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+        "C:\\Users\\Himanshu kumar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> c39c5431f3f2fe89ccd4a16ff73c5e0a64a1090f
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -7972,6 +7988,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
