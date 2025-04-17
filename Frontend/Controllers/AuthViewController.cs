@@ -48,7 +48,8 @@ namespace Frontend.Controllers
                         HttpContext.Session.SetString("UserName", $"{response.User.FirstName} {response.User.LastName}");
                     }
                     
-                    return RedirectToAction("Index", "Home");
+                    // Redirect to User Dashboard instead of Home
+                    return RedirectToAction("Dashboard", "User");
                 }
                 
                 ModelState.AddModelError("", response?.Message ?? response?.Error ?? "Login failed");
