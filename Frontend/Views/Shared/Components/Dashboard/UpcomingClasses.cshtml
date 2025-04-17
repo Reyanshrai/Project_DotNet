@@ -1,0 +1,51 @@
+@{
+    // In a real application, these values would come from the backend
+    var classes = new[]
+    {
+        new { id = 1, name = "Yoga Flow", trainer = "Emily Johnson", time = "Today, 5:30 PM", spots = 3, booked = true },
+        new { id = 2, name = "HIIT Cardio", trainer = "Mike Chen", time = "Tomorrow, 6:00 AM", spots = 5, booked = false },
+        new { id = 3, name = "Strength Training", trainer = "Sarah Williams", time = "Wed, 7:00 PM", spots = 2, booked = false },
+        new { id = 4, name = "Pilates", trainer = "David Lee", time = "Thu, 9:00 AM", spots = 8, booked = false }
+    };
+}
+
+<div class="bg-white rounded-lg shadow-md p-6">
+    <h3 class="text-xl font-bold text-gray-800 mb-4">Upcoming Classes</h3>
+    
+    <div class="space-y-4">
+        @foreach (var classItem in classes)
+        {
+            <div class="border border-gray-200 rounded-lg p-3 hover:bg-gray-50">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h4 class="font-semibold text-gray-800">@classItem.name</h4>
+                        <p class="text-sm text-gray-600">Instructor: @classItem.trainer</p>
+                        <p class="text-sm text-gray-600">@classItem.time</p>
+                        <p class="text-xs text-gray-500 mt-1">@classItem.spots spots remaining</p>
+                    </div>
+                    <div>
+                        @if (classItem.booked)
+                        {
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold">
+                                Booked
+                            </span>
+                        }
+                        else
+                        {
+                            <form asp-controller="User" asp-action="BookClass" method="post">
+                                <input type="hidden" name="classId" value="@classItem.id" />
+                                <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded-full text-xs hover:bg-blue-700">
+                                    Book Now
+                                </button>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    
+    <a href="#" class="mt-4 inline-block text-blue-600 hover:text-blue-800 font-medium">
+        View all classes →
+    </a>
+</div> 

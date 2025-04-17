@@ -1,5 +1,8 @@
+@using Microsoft.AspNetCore.Http
 @{
     var currentPage = Context.Request.Path;
+    var isUserLoggedIn = !string.IsNullOrEmpty(Context.Session.GetString("AuthToken"));
+    var isAdminLoggedIn = !string.IsNullOrEmpty(Context.Session.GetString("AdminAuthToken"));
 }
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top border-bottom">
@@ -39,17 +42,65 @@
                 {
                     <li class="nav-item">
                         <a class="nav-link @(currentPage == item.Path ? "active fw-bold text-primary" : "text-light")"
-                            asp-controller="@item.Path.TrimStart('/')" asp-action="Index" onclick="closeNavbar()">
+                            asp-controller="@(item.Path.TrimStart('/').Length > 0 ? item.Path.TrimStart('/') : "Home")" asp-action="Index" onclick="closeNavbar()">
                             @item.Name
+                        </a>
+                    </li>
+                }
+                
+                @if (isUserLoggedIn)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link @(currentPage == "/user/dashboard" ? "active fw-bold text-primary" : "text-light")"
+                            asp-controller="User" asp-action="Dashboard" onclick="closeNavbar()">
+                            DASHBOARD
+                        </a>
+                    </li>
+                }
+                
+                @if (isAdminLoggedIn)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link @(currentPage == "/admin/dashboard" ? "active fw-bold text-primary" : "text-light")"
+                            asp-controller="Admin" asp-action="Dashboard" onclick="closeNavbar()">
+                            ADMIN
                         </a>
                     </li>
                 }
             </ul>
         </div>
 
-        <!-- Get Started Button -->
+        <!-- Get Started Button or User Info -->
         <div class="d-flex">
-            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#loginModal">Get Started</button>
+            @if (isUserLoggedIn || isAdminLoggedIn)
+            {
+                <div class="dropdown">
+                    <button class="btn btn-outline-light dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user me-1"></i>
+                        @(isUserLoggedIn ? Context.Session.GetString("UserName") : "Admin")
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        @if (isUserLoggedIn)
+                        {
+                            <li><a class="dropdown-item" asp-controller="User" asp-action="Dashboard">Dashboard</a></li>
+                        }
+                        @if (isAdminLoggedIn)
+                        {
+                            <li><a class="dropdown-item" asp-controller="Admin" asp-action="Dashboard">Admin Panel</a></li>
+                        }
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" asp-controller="@(isAdminLoggedIn ? "Admin" : "Auth")" asp-action="Logout">
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            }
+            else
+            {
+                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#loginModal">Get Started</button>
+            }
         </div>
     </div>
 </nav>

@@ -29,22 +29,7 @@ public class ApiService
         {
             _logger.LogInformation("Attempting to register user: {Email}", userData.Email);
             
-            // Create a dictionary with the exact field names expected by the backend
-            var userDataDict = new Dictionary<string, string>
-            {
-                { "firstname", userData.FirstName },
-                { "lastname", userData.LastName },
-                { "email", userData.Email },
-                { "password", userData.Password },
-                { "dateOfBirth", userData.Dob },
-                { "mobileNumber", userData.Mobile },
-                { "gender", userData.Gender }
-            };
-            
-            var json = JsonConvert.SerializeObject(userDataDict);
-            _logger.LogInformation("Serialized user data: {Json}", json);
-            
-            var jsonContent = new StringContent(json, Encoding.UTF8, "application/json");
+            var jsonContent = new StringContent(JsonConvert.SerializeObject(userData), Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync("users/register", jsonContent);
             
             var responseContent = await response.Content.ReadAsStringAsync();
@@ -67,24 +52,52 @@ public class ApiService
         {
             _logger.LogInformation("Attempting to login user: {Email}", userData.Email);
             
-            // Create a dictionary with the exact field names expected by the backend
-            var loginDataDict = new Dictionary<string, string>
+            // Create data dictionary with fields expected by the backend
+            var loginData = new Dictionary<string, string>
             {
                 { "email", userData.Email },
                 { "password", userData.Password }
             };
             
-            var json = JsonConvert.SerializeObject(loginDataDict);
-            _logger.LogInformation("Serialized login data: {Json}", json);
-            
-            var jsonContent = new StringContent(json, Encoding.UTF8, "application/json");
+            var jsonContent = new StringContent(JsonConvert.SerializeObject(loginData), Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync("users/login", jsonContent);
             
             var responseContent = await response.Content.ReadAsStringAsync();
             _logger.LogInformation("Login response: {StatusCode}, Content: {Content}", 
                 response.StatusCode, responseContent);
-                
-            return responseContent;
+            
+            // Parse the response to create an AuthResponse
+            if (response.IsSuccessStatusCode)
+            {
+                dynamic rawResponse = JsonConvert.DeserializeObject<dynamic>(responseContent);
+                if (rawResponse != null)
+                {
+                    // Create an AuthResponse manually
+                    var authResponse = new AuthResponse
+                    {
+                        Success = true,
+                        Message = "Login successful",
+                        Token = rawResponse.token?.ToString(),
+                        User = new UserData 
+                        {
+                            Id = rawResponse._id?.ToString(),
+                            Email = rawResponse.email?.ToString(),
+                            FirstName = rawResponse.firstname?.ToString(),
+                            LastName = rawResponse.lastname?.ToString(),
+                            Role = "User"
+                        }
+                    };
+                    
+                    return JsonConvert.SerializeObject(authResponse);
+                }
+            }
+            
+            // If we couldn't create a successful response, create an error response
+            return JsonConvert.SerializeObject(new AuthResponse
+            {
+                Success = false,
+                Error = "Invalid email or password"
+            });
         }
         catch (Exception ex)
         {
@@ -100,24 +113,52 @@ public class ApiService
         {
             _logger.LogInformation("Attempting to login admin: {Email}", userData.Email);
             
-            // Create a dictionary with the exact field names expected by the backend
-            var loginDataDict = new Dictionary<string, string>
+            // Create data dictionary with fields expected by the backend
+            var loginData = new Dictionary<string, string>
             {
                 { "email", userData.Email },
                 { "password", userData.Password }
             };
             
-            var json = JsonConvert.SerializeObject(loginDataDict);
-            _logger.LogInformation("Serialized admin login data: {Json}", json);
-            
-            var jsonContent = new StringContent(json, Encoding.UTF8, "application/json");
+            var jsonContent = new StringContent(JsonConvert.SerializeObject(loginData), Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync("admins/login", jsonContent);
             
             var responseContent = await response.Content.ReadAsStringAsync();
             _logger.LogInformation("Admin login response: {StatusCode}, Content: {Content}", 
                 response.StatusCode, responseContent);
-                
-            return responseContent;
+            
+            // Parse the response to create an AuthResponse
+            if (response.IsSuccessStatusCode)
+            {
+                dynamic rawResponse = JsonConvert.DeserializeObject<dynamic>(responseContent);
+                if (rawResponse != null)
+                {
+                    // Create an AuthResponse manually
+                    var authResponse = new AuthResponse
+                    {
+                        Success = true,
+                        Message = "Login successful",
+                        Token = rawResponse.token?.ToString(),
+                        User = new UserData 
+                        {
+                            Id = rawResponse._id?.ToString(),
+                            Email = rawResponse.email?.ToString(),
+                            FirstName = rawResponse.firstname?.ToString() ?? "Admin",
+                            LastName = rawResponse.lastname?.ToString() ?? "User",
+                            Role = "Admin"
+                        }
+                    };
+                    
+                    return JsonConvert.SerializeObject(authResponse);
+                }
+            }
+            
+            // If we couldn't create a successful response, create an error response
+            return JsonConvert.SerializeObject(new AuthResponse
+            {
+                Success = false,
+                Error = "Invalid email or password"
+            });
         }
         catch (Exception ex)
         {

@@ -1,0 +1,56 @@
+@{
+    // In a real application, these values would come from the backend
+    var weeklyWorkouts = 3;
+    var totalWorkouts = 5;
+    var percentage = (weeklyWorkouts / (float)totalWorkouts) * 100;
+    
+    var weeklyData = new[]
+    {
+        new { day = "Mon", completed = true },
+        new { day = "Tue", completed = true },
+        new { day = "Wed", completed = true },
+        new { day = "Thu", completed = false },
+        new { day = "Fri", completed = false },
+        new { day = "Sat", completed = false },
+        new { day = "Sun", completed = false }
+    };
+}
+
+<div class="bg-white rounded-lg shadow-md p-6">
+    <h3 class="text-xl font-bold text-gray-800 mb-4">Weekly Progress</h3>
+    
+    <div class="mb-4">
+        <div class="flex justify-between mb-1">
+            <span class="text-sm text-gray-700">@weeklyWorkouts of @totalWorkouts workouts completed</span>
+            <span class="text-sm text-gray-700">@Math.Round(percentage)%</span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-2">
+            <div class="bg-blue-600 h-2 rounded-full" style="width: @Math.Round(percentage)%"></div>
+        </div>
+    </div>
+    
+    <div class="grid grid-cols-7 gap-1 mt-4">
+        @foreach (var day in weeklyData)
+        {
+            <div class="flex flex-col items-center">
+                <div class="text-xs text-gray-500 mb-1">@day.day</div>
+                @if (day.completed)
+                {
+                    <div class="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center">
+                        <i class="fas fa-check text-white"></i>
+                    </div>
+                }
+                else
+                {
+                    <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+                        <i class="fas fa-dumbbell text-gray-400"></i>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+    
+    <a href="#" class="mt-4 inline-block text-blue-600 hover:text-blue-800 font-medium">
+        View workout history →
+    </a>
+</div> 

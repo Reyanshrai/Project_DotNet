@@ -1,0 +1,51 @@
+@{
+    ViewData["Title"] = "User Dashboard";
+    Layout = "_Layout";
+}
+
+<div class="min-vh-100 bg-light py-4">
+    <div class="container">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
+                @TempData["SuccessMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        <partial name="Components/Dashboard/DashboardHeader" />
+
+        <div class="row mb-4">
+            <div class="col-12">
+                <partial name="Components/Dashboard/StatsGrid" />
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <partial name="Components/Dashboard/TodaysWorkout" />
+            </div>
+            <div class="col-lg-6">
+                <partial name="Components/Dashboard/WeeklyProgress" />
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <partial name="Components/Dashboard/WeightTracking" />
+            </div>
+            <div class="col-lg-6">
+                <partial name="Components/Dashboard/UpcomingClasses" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <partial name="Components/Dashboard/SubscriptionPlans" />
+            </div>
+            <div class="col-lg-6">
+                <partial name="Components/Dashboard/DietPlans" />
+            </div>
+        </div>
+    </div>
+</div> 
